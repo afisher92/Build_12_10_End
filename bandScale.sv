@@ -14,8 +14,8 @@ wire signed [15:0] finalAudio = SignedMult[25:10];
 localparam sat_neg = 4'b1111;
 localparam sat_pos = 4'b0111;
 
-assign scaled = (sat==sat_pos)  ?   16'h8000:
-		(sat==sat_neg)  ?   16'h7fff:
-				    finalAudio;
+assign scaled = (sat==sat_pos)  ?   16'h8000 :
+				(sat==sat_neg)  ?   16'h7fff :
+				finalAudio;
 
 endmodule
