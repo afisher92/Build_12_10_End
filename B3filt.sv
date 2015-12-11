@@ -19,7 +19,7 @@ always_ff @(posedge clk, negedge rst_n)
 		addr <= 10'h000;
 	else if(pos_seq)
 	    addr <= 10'h000;
-	else if(addr <= 1020)
+	else if(addr <= 1019)
 	    addr <= addr + 1;
 	else
 		addr <= 10'h000;
