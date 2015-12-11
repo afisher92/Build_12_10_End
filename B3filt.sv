@@ -45,7 +45,7 @@ end else if(pos_seq) begin
 	    raccum <= raccum + (dout * rght_in);
 	    laccum <= laccum + (dout * lft_in);
 	  end
-assign rght_out = (addr == 1022) ? raccum[30:15] : 16'h0000;
-assign lft_out = (addr == 1022) ? laccum[30:15] : 16'h0000;
+assign rght_out = (addr == 1020) ? raccum[30:15] : 16'h0000;
+assign lft_out = (addr == 1020) ? laccum[30:15] : 16'h0000;
 
 endmodule
