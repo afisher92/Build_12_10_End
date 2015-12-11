@@ -15,12 +15,14 @@ ROM_B3 B3(.dout(dout), .clk(clk), .addr(addr));
 
 //Implements addr
 always_ff @(posedge clk, negedge rst_n)
- if(!rst_n)
-  addr <= 10'h000;
- else if(pos_seq)
+	if(!rst_n)
+		addr <= 10'h000;
+	else if(pos_seq)
 	    addr <= 10'h000;
-	   else
+	else if(addr <= 1020)
 	    addr <= addr + 1;
+	else
+		addr <= 10'h000;
 
 //Sequencing posedge detect
 always @(posedge clk, negedge rst_n)
