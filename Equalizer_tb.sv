@@ -33,6 +33,7 @@ module Equalizer_tb();
   initial begin
   clk = 0;
   i = 0;
+  j = 0;
   aout_lft = 0;
   aout_rht = 0;
   RST_n = 0;
@@ -58,15 +59,11 @@ module Equalizer_tb();
 end  
 
  //write the audio out to the file 
-always@(posedge LRCLK, negedge rst_n) begin
-   if(!rst_n)
-     j = 1;
-   else 
-     $fdisplay (file,"%d,%d", aout_rht, aout_lft);
-   if (j>= 8000)begin
-     $fclose(file);
-   end
-   	 j = j + 1;
+always@(posedge LRCLK) begin
+if(aout_rht != 0 || aout_lft != 0)begin
+  $fdisplay (file,"%d,%d", aout_rht, aout_lft);
+  j = j+1;
+ end
 end
   
  //check the max and min of the left and right channels
