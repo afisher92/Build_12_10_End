@@ -1,4 +1,4 @@
-module B2filt(rght_in, lft_in, sequencing, rst_n, rght_out, lft_out, clk);
+module B1filt(rght_in, lft_in, sequencing, rst_n, rght_out, lft_out, clk);
 
 input rst_n, clk, sequencing;
 input [15:0] rght_in, lft_in;
@@ -11,7 +11,7 @@ reg[9:0]addr;
 reg FF_seq, pos_seq;
 
 //Instantiates the ROM
-ROM_B2 B2(.dout(dout), .clk(clk), .addr(addr));
+ROM_B1 B1(.dout(dout), .clk(clk), .addr(addr));
 
 //Implements addr
 always_ff @(posedge clk, negedge rst_n)
@@ -19,7 +19,7 @@ always_ff @(posedge clk, negedge rst_n)
 		addr <= 10'h000;
 	else if(pos_seq)
 	    addr <= 10'h000;
-	else if(addr <= 1020)
+	else if(addr <= 1019)
 	    addr <= addr + 1;
 	else
 		addr <= 10'h000;
