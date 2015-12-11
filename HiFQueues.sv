@@ -53,6 +53,8 @@ always @(posedge clk, negedge rst_n)
 always @(posedge sequencing, negedge rst_n)
 	if(!rst_n)
 		read_start <= 11'h1FD;
+	else if(read_start == 11'h5FE)
+		read_start <= 11'h000;
 	else 
 		read_start <= read_ptr;
 	
@@ -63,7 +65,7 @@ always @(posedge clk, negedge rst_n)
 		sequencing <= 1'b0;
 	else if(cnt == 1531 & valid_rise)
 		sequencing <= 1'b1;
-	else if(read_cnt == 11'h3FD)
+	else if(read_cnt == 11'h3FC)
 		sequencing <= 1'b0;
 		
 assign smpl_out   = (sequencing) ? data_out : 16'h0000;
@@ -86,7 +88,7 @@ always @(posedge clk, negedge rst_n) begin
 		next_old <= old_ptr + 1;
 end
 
-assign next_read = (read_ptr == 11'h5FF) ? 11'h000 : read_ptr + 1;
+assign next_read = (read_ptr >= 11'h5FF) ? 11'h000 : read_ptr + 1;
 
 /* ------ Manage Queue Counters ------------------------------------------------------------------- */
 // High Frequency Q Counter
